@@ -52,7 +52,7 @@ public class InstructorServiceImpl implements InstructorService {
     public String startCourse(Long courseId, Long userId) {
         Boolean courseExistsCheck=courseRepository.existsById(courseId);
         if(!courseExistsCheck){
-            return "Course does not exist, please verify your information";
+            return "Course does not exist, please verify your information.";
         }
         Instructor instructor=instructorRepository.findByUserId(userId);
         Optional<Course> courseToStart= instructor.getCourses().stream()

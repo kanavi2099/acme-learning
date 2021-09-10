@@ -35,7 +35,7 @@ public class StudentController {
     }
 
     @Operation(description = "Drops a student from a course.", security = @SecurityRequirement(name = "basicAuth"))
-    @RequestMapping(value="/course/enrollment/{id}",method = RequestMethod.GET)
+    @RequestMapping(value="/course/enrollment/{id}",method = RequestMethod.DELETE)
     public String dropFromCourse(
             @Parameter(description = "Id of the course.")
             @PathVariable(name = "id") Long courseId){
