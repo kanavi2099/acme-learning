@@ -92,7 +92,7 @@ Following are the available resource paths available included in the app
 
 ### /register
 
-* POST method will allow to create a user, be it a CHEF or a HELPER
+* POST method will allow to create a user, be it a INSTRUCTOR or a STUDENT
 
 ![controller1](./img/registerController.PNG)
 
