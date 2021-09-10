@@ -4,5 +4,5 @@ import com.unosquare.acmelearning.dto.UserRegistration;
 import com.unosquare.acmelearning.model.User;
 
 public interface UserService {
-    String registerUSer(UserRegistration newUser);
+    String registerUser(UserRegistration newUser);
 }

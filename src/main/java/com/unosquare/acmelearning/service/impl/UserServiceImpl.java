@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private final StudentRepository studentRepository;
 
     @Override
-    public String registerUSer(UserRegistration newUser) {
+    public String registerUser(UserRegistration newUser) {
         Boolean checkExists=userRepository.existsByUsername(newUser.getUsername());
         if(checkExists)
             return "Username already in use, please choose another.";
