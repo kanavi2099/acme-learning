@@ -46,7 +46,7 @@ public class InstructorController {
     @GetMapping
     @RequestMapping("/course/{id}/enrollment")
     public List<EnrolledStudents> getEnrolledStudents(@PathVariable(name = "id") Long id){
-
+        return instructorService.getEnrolledStudentsByCourse(id,getUser().getId());
     }
 
 
