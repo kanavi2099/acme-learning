@@ -5,6 +5,9 @@ import com.unosquare.acmelearning.dto.EnrolledStudents;
 import com.unosquare.acmelearning.model.Course;
 import com.unosquare.acmelearning.model.User;
 import com.unosquare.acmelearning.service.InstructorService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -17,35 +20,38 @@ import java.util.List;
 public class InstructorController {
     private final InstructorService instructorService;
 
-    @RequestMapping("/course")
-    @PostMapping
+    @Operation(description = "Create a course for an instructor.", security = @SecurityRequirement(name = "basicAuth"))
+    @RequestMapping(value = "/course",method = RequestMethod.POST)
+
     public String createCourse(@RequestBody CourseRequest newCourse){
         return instructorService.createCourse(newCourse, getUser().getId());
     }
 
-    @GetMapping
-    @RequestMapping("/course")
+    @Operation(description = "list all courses for an instructor.", security = @SecurityRequirement(name = "basicAuth"))
+    @RequestMapping(value="/course",method = RequestMethod.GET)
     public List<Course> listCourses(){
         return instructorService.listCourses(getUser().getId());
     }
 
-    @PutMapping
-    @RequestMapping("/course/{id}")
-    public String startCourse(@PathVariable(name = "id")  Long courseId ){
+    @Operation(description = "Starts a course for an instructor.", security = @SecurityRequirement(name = "basicAuth"))
+    @RequestMapping(value="/course/{id}",method = RequestMethod.PUT)
+    public String startCourse(@Parameter(description = "Id of the course.")
+                                  @PathVariable(name = "id")  Long courseId ){
         return instructorService.startCourse(courseId, getUser().getId());
 
     }
 
-
-    @DeleteMapping
-    @RequestMapping("/course/{id}")
-    public String cancelCourse(@PathVariable(name = "id")  Long courseId ){
+    @Operation(description = "Cancels a course for an instructor.", security = @SecurityRequirement(name = "basicAuth"))
+    @RequestMapping(value="/course/{id}",method = RequestMethod.DELETE)
+    public String cancelCourse(@Parameter(description = "Id of the course.")
+                                   @PathVariable(name = "id")  Long courseId ){
         return instructorService.cancelCourse(courseId, getUser().getId());
     }
 
-    @GetMapping
-    @RequestMapping("/course/{id}/enrollment")
-    public List<EnrolledStudents> getEnrolledStudents(@PathVariable(name = "id") Long id){
+    @Operation(description = "Lists enrolled students in a course for an instructor.", security = @SecurityRequirement(name = "basicAuth"))
+    @RequestMapping(value="/course/{id}/enrollment",method = RequestMethod.GET)
+    public List<EnrolledStudents> getEnrolledStudents(@Parameter(description = "Id of the course.")
+                                                          @PathVariable(name = "id") Long id){
         return instructorService.getEnrolledStudentsByCourse(id,getUser().getId());
     }
 
